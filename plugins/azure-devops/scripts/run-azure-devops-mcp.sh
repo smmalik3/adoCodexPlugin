@@ -1,6 +1,17 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+plugin_root="$(cd "$script_dir/.." && pwd)"
+local_env_file="${AZURE_DEVOPS_LOCAL_ENV_FILE:-$plugin_root/.env.local}"
+
+if [[ -f "$local_env_file" ]]; then
+  set -a
+  # shellcheck disable=SC1090
+  source "$local_env_file"
+  set +a
+fi
+
 if [[ -z "${AZURE_DEVOPS_ORG:-}" ]]; then
   cat >&2 <<'EOF'
 AZURE_DEVOPS_ORG is required.
@@ -21,6 +32,9 @@ Optional environment variables:
   PERSONAL_ACCESS_TOKEN=<base64-encoded email:pat>
   AZURE_DEVOPS_PROJECT="Project name"
   AZURE_DEVOPS_TEAM="Team name"
+
+You can also run:
+  ./scripts/configure-plugin.sh
 EOF
   exit 64
 fi

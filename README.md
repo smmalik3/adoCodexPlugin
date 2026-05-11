@@ -16,26 +16,34 @@ git clone <internal-repo-url> ~/dev/azure-devops-codex-plugin
 cd ~/dev/azure-devops-codex-plugin
 ```
 
-Set your own Azure DevOps configuration. Do not commit these values:
+Run the local setup script:
 
 ```bash
-export AZURE_DEVOPS_ORG=gps-aie-devops
-export AZURE_DEVOPS_PROJECT=AIE
-export AZURE_DEVOPS_AUTHENTICATION=pat
-export AZURE_DEVOPS_PAT="<your-pat>"
+./scripts/configure-plugin.sh
 ```
 
-Then validate the local setup:
+The script writes `plugins/azure-devops/.env.local` with `0600` permissions. That file is ignored by Git and is loaded automatically by the plugin launcher.
+
+For scripted setup, provide values through environment variables:
+
+```bash
+AZURE_DEVOPS_ORG=gps-aie-devops \
+AZURE_DEVOPS_PROJECT=AIE \
+AZURE_DEVOPS_PAT="<your-pat>" \
+./scripts/configure-plugin.sh --non-interactive
+```
+
+Validate the local setup any time with:
 
 ```bash
 ./scripts/validate-plugin.sh
 ```
 
-Restart Codex after setting environment variables so the MCP server inherits them.
+Restart Codex after setup so the MCP server is reloaded.
 
 ## Share With Teammates
 
-The safest distribution path is a private internal Git repository containing this whole repo. Teammates clone it, configure their own PAT locally, and install or enable the repo-local marketplace/plugin in Codex.
+The safest distribution path is a private internal Git repository containing this whole repo. Teammates clone it, run `./scripts/configure-plugin.sh`, and install or enable the repo-local marketplace/plugin in Codex.
 
 Do not share PATs in Git, Slack, docs, screenshots, or shell transcripts. If a PAT is exposed, revoke it and issue a new one.
 

@@ -18,6 +18,14 @@ require_file "$plugin_root/.mcp.json"
 require_file "$plugin_root/scripts/run-azure-devops-mcp.sh"
 require_file "$repo_root/.agents/plugins/marketplace.json"
 
+local_env_file="${AZURE_DEVOPS_LOCAL_ENV_FILE:-$plugin_root/.env.local}"
+if [[ -f "$local_env_file" ]]; then
+  set -a
+  # shellcheck disable=SC1090
+  source "$local_env_file"
+  set +a
+fi
+
 python3 -m json.tool "$plugin_root/.codex-plugin/plugin.json" >/dev/null
 python3 -m json.tool "$plugin_root/.mcp.json" >/dev/null
 python3 -m json.tool "$repo_root/.agents/plugins/marketplace.json" >/dev/null

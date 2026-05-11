@@ -1,7 +1,16 @@
 {
-  "name": "[TODO: marketplace-name]",
+  "name": "azure-devops",
   "interface": {
-    "displayName": "[TODO: Marketplace Display Name]"
+    "displayName": "ADO Codex Plugin",
+    "shortDescription": "Azure DevOps integration for Codex using Microsoft's local Azure DevOps MCP server.",
+    "longDescription": "Bring Azure DevOps context into Codex through Microsoft's local Azure DevOps MCP server, with workflow guidance for projects, work items, pull requests, repositories, pipelines, wiki, test plans, and search.",
+    "developerName": "Salman Malik",
+    "category": "Coding",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "websiteURL": "www.salmanmalik.co"
   },
   "plugins": [
     {
