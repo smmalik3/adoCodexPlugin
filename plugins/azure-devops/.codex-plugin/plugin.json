@@ -1,0 +1,46 @@
+{
+  "name": "azure-devops",
+  "version": "0.1.0",
+  "description": "Azure DevOps integration for Codex using Microsoft's local Azure DevOps MCP server.",
+  "author": {
+    "name": "[TODO: Author Name]",
+    "email": "[TODO: author@example.com]",
+    "url": "[TODO: https://github.com/author]"
+  },
+  "homepage": "https://github.com/microsoft/azure-devops-mcp",
+  "repository": "[TODO: https://github.com/author/plugin]",
+  "license": "[TODO: MIT]",
+  "keywords": [
+    "azure-devops",
+    "ado",
+    "boards",
+    "repos",
+    "pipelines",
+    "mcp"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Azure DevOps",
+    "shortDescription": "Work with Azure Boards, Repos, and Pipelines",
+    "longDescription": "Bring Azure DevOps context into Codex through Microsoft's local Azure DevOps MCP server, with workflow guidance for projects, work items, pull requests, repositories, pipelines, wiki, test plans, and search.",
+    "developerName": "[TODO: Developer Name]",
+    "category": "Coding",
+    "capabilities": [
+      "Interactive",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/microsoft/azure-devops-mcp",
+    "privacyPolicyURL": "[TODO: https://example.com/privacy]",
+    "termsOfServiceURL": "[TODO: https://example.com/terms]",
+    "defaultPrompt": [
+      "List my Azure DevOps projects and assigned work items.",
+      "Summarize open pull requests for this Azure DevOps repo.",
+      "Check the latest Azure Pipelines run and explain failures."
+    ],
+    "brandColor": "#0078D4",
+    "composerIcon": "./assets/azure-devops-small.svg",
+    "logo": "./assets/azure-devops.svg",
+    "screenshots": []
+  }
+}
