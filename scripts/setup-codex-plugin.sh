@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
+set +x
+umask 077
 
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 plugin_root="$repo_root/plugins/azure-devops"
@@ -98,10 +100,7 @@ validate_setup() {
 
   local local_env_file="${AZURE_DEVOPS_LOCAL_ENV_FILE:-$plugin_root/.env.local}"
   if [[ -f "$local_env_file" ]]; then
-    set -a
-    # shellcheck disable=SC1090
-    source "$local_env_file"
-    set +a
+    load_local_env "$local_env_file"
   fi
 
   python3 -m json.tool "$plugin_root/.codex-plugin/plugin.json" >/dev/null
@@ -134,6 +133,28 @@ validate_setup() {
 
 require_file() {
   [[ -f "$1" ]] || fail "missing file: $1"
+}
+
+load_local_env() {
+  local local_env_file="$1"
+  local key value
+
+  while IFS= read -r line; do
+    [[ -n "$line" ]] || continue
+    [[ "$line" == export\ * ]] || continue
+    key="${line#export }"
+    key="${key%%=*}"
+    value="${line#*=}"
+    case "$key" in
+      AZURE_DEVOPS_ORG|AZURE_DEVOPS_AUTHENTICATION|AZURE_DEVOPS_MCP_DOMAINS|AZURE_DEVOPS_PAT_EMAIL|AZURE_DEVOPS_MCP_PACKAGE|AZURE_DEVOPS_PROJECT|AZURE_DEVOPS_TEAM|AZURE_DEVOPS_PAT|PERSONAL_ACCESS_TOKEN)
+        ;;
+      *)
+        continue
+        ;;
+    esac
+    # shellcheck disable=SC2163
+    export "$key=$(python3 -c 'import ast,sys; raw=sys.argv[1]; print(ast.literal_eval(raw) if raw else "")' "$value")"
+  done < "$local_env_file"
 }
 
 non_interactive=0
