@@ -16,10 +16,10 @@ git clone <internal-repo-url> ~/dev/azure-devops-codex-plugin
 cd ~/dev/azure-devops-codex-plugin
 ```
 
-Run the local setup script:
+Run the local install script:
 
 ```bash
-./scripts/configure-plugin.sh
+./scripts/codex-setup.sh
 ```
 
 The script writes `plugins/azure-devops/.env.local` with `0600` permissions. That file is ignored by Git and is loaded automatically by the plugin launcher.
@@ -30,7 +30,7 @@ For scripted setup, provide values through environment variables:
 AZURE_DEVOPS_ORG=gps-aie-devops \
 AZURE_DEVOPS_PROJECT=AIE \
 AZURE_DEVOPS_PAT="<your-pat>" \
-./scripts/configure-plugin.sh --non-interactive
+./scripts/codex-setup.sh --non-interactive
 ```
 
 Validate the local setup any time with:
@@ -43,7 +43,7 @@ Restart Codex after setup so the MCP server is reloaded.
 
 ## Share With Teammates
 
-The safest distribution path is a private internal Git repository containing this whole repo. Teammates clone it, run `./scripts/configure-plugin.sh`, and install or enable the repo-local marketplace/plugin in Codex.
+The safest distribution path is a private internal Git repository containing this whole repo. Teammates clone it, run `./scripts/install.sh`, and install or enable the repo-local marketplace/plugin in Codex.
 
 Do not share PATs in Git, Slack, docs, screenshots, or shell transcripts. If a PAT is exposed, revoke it and issue a new one.
 

@@ -7,10 +7,11 @@ This plugin wires Codex to Microsoft's local Azure DevOps MCP server.
 Install Node.js 20 or newer, then run the repository setup script:
 
 ```bash
-./scripts/configure-plugin.sh
+./scripts/codex-setup.sh
 ```
 
 The script writes a local ignored `plugins/azure-devops/.env.local` file that this launcher reads automatically.
+It will prompt for your Azure DevOps org, project, and PAT if you do not pass them in.
 
 You can also expose your Azure DevOps organization slug and PAT manually:
 
