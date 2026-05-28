@@ -23,6 +23,7 @@ Run the local install script:
 ```
 
 The script writes `plugins/azure-devops/.env.local` with `0600` permissions. That file is ignored by Git and is loaded automatically by the plugin launcher.
+If the plugin is installed from a remote repo, this path refers to the installed local copy on your machine, not the GitHub source repository.
 
 For scripted setup, provide values through environment variables:
 
@@ -43,7 +44,7 @@ Restart Codex after setup so the MCP server is reloaded.
 
 ## Share With Teammates
 
-The safest distribution path is a private internal Git repository containing this whole repo. Teammates clone it, run `./scripts/install.sh`, and install or enable the repo-local marketplace/plugin in Codex.
+The safest distribution path is a private internal Git repository containing this whole repo. Teammates install it through Codex, then run `./scripts/codex-setup.sh` in the installed plugin folder so the local config is created on their machine.
 
 Do not share PATs in Git, Slack, docs, screenshots, or shell transcripts. If a PAT is exposed, revoke it and issue a new one.
 

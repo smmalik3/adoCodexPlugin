@@ -10,7 +10,7 @@ Install Node.js 20 or newer, then run the repository setup script:
 ./scripts/codex-setup.sh
 ```
 
-The script writes a local ignored `plugins/azure-devops/.env.local` file that this launcher reads automatically.
+The script writes the plugin's local ignored `.env.local` file in the installed plugin folder. That file is read automatically by the launcher.
 It will prompt for your Azure DevOps org, project, and PAT if you do not pass them in.
 
 You can also expose your Azure DevOps organization slug and PAT manually:
@@ -51,7 +51,7 @@ export AZURE_DEVOPS_PAT_EMAIL=pat
 
 The Microsoft Azure DevOps MCP server expects PAT auth as `--authentication pat` plus a `PERSONAL_ACCESS_TOKEN` value containing base64-encoded `email:pat`. This plugin launcher accepts `AZURE_DEVOPS_PAT` as a safer raw input and encodes it for the MCP server at startup. If you already have the encoded value, set `PERSONAL_ACCESS_TOKEN` directly instead.
 
-Do not commit PAT values in `.mcp.json`, `.env`, shell history, or docs.
+Do not commit PAT values in `.mcp.json`, `.env`, `.env.local`, shell history, or docs.
 
 ## Prompts To Try
 
