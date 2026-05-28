@@ -7,7 +7,7 @@ This plugin wires Codex to Microsoft's local Azure DevOps MCP server.
 Install Node.js 20 or newer, then run the repository setup script:
 
 ```bash
-./scripts/codex-setup.sh
+./scripts/setup-codex-plugin.sh
 ```
 
 The script writes the plugin's local ignored `.env.local` file in the installed plugin folder. That file is read automatically by the launcher.
