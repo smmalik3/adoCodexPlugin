@@ -34,7 +34,7 @@ Optional environment variables:
   AZURE_DEVOPS_TEAM="Team name"
 
 You can also run:
-  ./scripts/configure-plugin.sh
+  ./scripts/setup-codex-plugin.sh
 EOF
   exit 64
 fi
